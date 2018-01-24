@@ -16,7 +16,8 @@ fn2 = (N+2)/tb
 data_in = np.random.randint(2, size=M) # losowe tworzenie tablicy z 0 lub 1 przy rozmiarze M podawanym wczesniej
 # dlatego wykresy są różne cały czas
 ############## ASK
-za = sa =[]
+za = []
+sa =[]
 n = np.arange(M)
 d = np.arange(fs)
 for b in n:
@@ -44,8 +45,7 @@ for b in n:
             sn2.append(x2)
             zf.append(x2)
 ###################PSK
-zp = []
-sp = []
+zp = sp =[]
 n = np.arange(M)
 d = np.arange(fs)
 for b in n:
