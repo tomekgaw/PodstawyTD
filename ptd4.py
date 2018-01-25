@@ -3,7 +3,7 @@ import numpy as np
 
 A1 = 5
 A2 = 1
-fn = 2
+fn = 5
 fs = 100 # musi byc wieksze niz 2x fn
 M = 15 # ilosc bitow do przeslania
 tb = 1 #czas trwania bitu w sekundach
@@ -12,12 +12,11 @@ N = 1
 fn1 = (N+1)/tb
 fn2 = (N+2)/tb
 
-
-data_in = np.random.randint(2, size=M) # losowe tworzenie tablicy z 0 lub 1 przy rozmiarze M podawanym wczesniej
+data_in = [1,1,0,0,1,0,1,0,1,1,1,0,1,0,0]
+# data_in = np.random.randint(2, size=M) ## losowe tworzenie tablicy z 0 lub 1 przy rozmiarze M podawanym wczesniej
 # dlatego wykresy są różne cały czas
 ############## ASK
 za = []
-sa =[]
 n = np.arange(M)
 d = np.arange(fs)
 for b in n:
@@ -26,11 +25,9 @@ for b in n:
             za.append( A1 * np.sin(2 * np.pi * fn * x / fs))
         else:
             x = A2 * np.sin(2 * np.pi * fn * x / fs)
-            sa.append(x)
             za.append(x)
 ###################FSK
 zf = []
-sn1 = sn2 = []
 n = np.arange(M)
 d = np.arange(fs)
 for b in n:
@@ -38,21 +35,18 @@ for b in n:
         if data_in[b] == 0:
 
             x1 = np.sin(2 * np.pi * fn1 * x / fs)
-            sn1.append(x1)
             zf.append(x1)
         else:
             x2 = np.sin(2 * np.pi * fn2 * x / fs)
-            sn2.append(x2)
             zf.append(x2)
 ###################PSK
-zp = sp =[]
+zp = []
 n = np.arange(M)
 d = np.arange(fs)
 for b in n:
     for x in d:
         if data_in[b] == 0:
             x = np.sin(2 * np.pi * fn * x / fs)
-            sp.append(x)
             zp.append(x)
         else:
             zp.append(np.sin(np.pi + 2 * np.pi * fn * x / fs))
