@@ -17,7 +17,7 @@ A1za = []
 A2za = []
 for i in range(0,100):
     A1za.append(np.sin(2 * np.pi * ptd4.fn / ptd4.fs))
-    A2za.append( np.sin(np.pi +2 * np.pi * ptd4.fn / ptd4.fs ))
+    A2za.append( np.sin(np.pi + 2 * np.pi * ptd4.fn / ptd4.fs ))
 
 xd = []
 zA = []
@@ -33,28 +33,14 @@ try:
                 w = A1za[x] * ptd4.A2 * np.sin(2 * np.pi * ptd4.fn * x / ptd4.fs)
                 zA.append(w)
             s = s + zA[x]
-            xd.append(s)
 
 
 except:
     pass
 
-# for _ in range(0,ptd4.fs):
-#     suma = 0
-#     for j in range(0,10):
-#         if ptd4.data_in == 1:
-#             p.append(A1za * np.sin(2 * np.pi * ptd4.fn / ptd4.fs))
-#             print(1)
-#         else:
-#             p.append(A1za * np.sin(np.pi + 2 * np.pi * ptd4.fn / ptd4.fs))
-#             print(2)
-#         suma = suma + p[j]
-#         sume[j] = sume[j] + suma
-#         print(sume)
-
-
-
-
+y = psk
+w = integrate.cumtrapz(psk,initial=0)
+print(w)
 
 def demod1(d,h):
     s = []
@@ -76,11 +62,11 @@ plt.subplot(3,1,1)
 plt.title('demodulacja sygnału ASK dla h = {0}'.format(h1))
 plt.xlabel('t')
 plt.ylabel('x(t)')
-plt.plot(psk)
+plt.plot(psk,w)
 plt.subplot(3,1,2)
 plt.xlabel('t')
 plt.ylabel('p(t)')
-plt.plot(xd)
+plt.plot(w)
 plt.subplot(3,1,3)
 plt.xlabel('t')
 plt.ylabel('m(t)')
