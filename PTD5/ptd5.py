@@ -28,8 +28,6 @@ def sumation(x):
             xt.append(suma)
     return xt
 
-# xs = list(accumulate(psk))
-# print(xs)
 
 def demod1(d,h):
     s = []
