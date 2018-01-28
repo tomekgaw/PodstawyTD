@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
-A1 = 5
+A1 = 0.5
 A2 = 1
 fn = 2
 fs = 100 # musi byc wieksze niz 2x fn
@@ -23,9 +23,9 @@ d = np.arange(fs)
 for b in n:
     for x in d:
         if data_in[b] == 0:
-            za.append( A1 * np.sin(2 * np.pi * fn * x / fs))
+            za.append( A1 + np.sin(2 * np.pi * fn * x / fs))
         else:
-            za.append(A2 * np.sin(2 * np.pi * fn * x / fs))
+            za.append(A2  + np.sin(2 * np.pi * fn * x / fs))
 ###################FSK
 zf = []
 n = np.arange(M)

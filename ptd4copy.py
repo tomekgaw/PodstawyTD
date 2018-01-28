@@ -1,9 +1,9 @@
 from matplotlib import pyplot as plt
 import numpy as np
 
-A1 = 5
+A1 = 0.5
 A2 = 1
-fn = 5
+fn = 2
 fs = 100 # musi byc wieksze niz 2x fn
 M = 15 # ilosc bitow do przeslania
 tb = 1 #czas trwania bitu w sekundach
@@ -12,10 +12,11 @@ N = 1
 fn1 = (N+1)/tb
 fn2 = (N+2)/tb
 
-data_in = [1,1,0,0,1,0,1,0,1,1,1,0,1,0,0]
+data_in = [0,1,0,0,0,0,1,0,1,1,1,0,1,0,0]
 # data_in = np.random.randint(2, size=M) ## losowe tworzenie tablicy z 0 lub 1 przy rozmiarze M podawanym wczesniej
 # dlatego wykresy są różne cały czas
 ############## ASK
+
 za = []
 n = np.arange(M)
 d = np.arange(fs)
@@ -24,8 +25,7 @@ for b in n:
         if data_in[b] == 0:
             za.append( A1 * np.sin(2 * np.pi * fn * x / fs))
         else:
-            x = A2 * np.sin(2 * np.pi * fn * x / fs)
-            za.append(x)
+            za.append(A2 * np.sin(2 * np.pi * fn * x / fs))
 ###################FSK
 zf = []
 n = np.arange(M)
@@ -33,12 +33,9 @@ d = np.arange(fs)
 for b in n:
     for x in d:
         if data_in[b] == 0:
-
-            x1 = np.sin(2 * np.pi * fn1 * x / fs)
-            zf.append(x1)
+            zf.append(np.sin(2 * np.pi * fn1 * x / fs))
         else:
-            x2 = np.sin(2 * np.pi * fn2 * x / fs)
-            zf.append(x2)
+            zf.append(np.sin(2 * np.pi * fn2 * x / fs))
 ###################PSK
 zp = []
 n = np.arange(M)
@@ -46,11 +43,9 @@ d = np.arange(fs)
 for b in n:
     for x in d:
         if data_in[b] == 0:
-            x = np.sin(2 * np.pi * fn * x / fs)
-            zp.append(x)
+            zp.append(np.sin(2 * np.pi * fn * x / fs))
         else:
             zp.append(np.sin(np.pi + 2 * np.pi * fn * x / fs))
-
 
 # plt.figure(1)
 # plt.subplot(3,1,1)
@@ -86,8 +81,8 @@ for b in n:
 # plt.xlabel('t')
 # plt.plot(abs(F3))
 # plt.savefig('lab4zad2widma')
-#
-#
+
+
 # M = ('ASK','FSK','PSK')
 # def decyb(signal):
 #     DB = [20 * np.log10(np.abs(signal))]
@@ -102,8 +97,8 @@ for b in n:
 # decyb(F2)
 # print('PSK')
 # decyb(F3)
-
-
-
-
+#
+#
+#
+#
 plt.show()
