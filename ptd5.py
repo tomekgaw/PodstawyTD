@@ -46,7 +46,7 @@ def demod1(d,h):
 # plt.plot(ss)
 # plt.savefig('lab5zad1PSK')
 #
-# ###############FSK
+# ###############ASK
 # sa = [ptd4.A2 * np.sin(2 * np.pi * ptd4.fn * b / ptd4.fs) for b in range(1500)]
 # h2 = 35
 # ask = np.multiply(ptd4.za,sp)
@@ -69,7 +69,7 @@ def demod1(d,h):
 # plt.plot(m2)
 # plt.savefig('lab5zad1ASK')
 #
-# ################################PSK
+# ################################FSK
 #
 # sn1 = [np.sin(2 * np.pi * ptd4.fn1 * b / ptd4.fs) for b in range(1500)]
 # sn2 = [np.sin(2 * np.pi * ptd4.fn2 * b / ptd4.fs) for b in range(1500)]
