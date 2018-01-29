@@ -27,50 +27,49 @@ def demod1(d,h):
             s.append(0)
     return s
 
-# h1 =10
-# xt = sumation(psk)
-# ss =  demod1(xt,h1)
-# plt.figure()
-# plt.subplot(3,1,1)
-# plt.title('demodulacja sygnału PSK dla h = {0}'.format(h1))
-# plt.xlabel('t')
-# plt.ylabel('x(t)')
-# plt.plot(psk)
-# plt.subplot(3,1,2)
-# plt.xlabel('t')
-# plt.ylabel('p(t)')
-# plt.plot(xt)
-# plt.subplot(3,1,3)
-# plt.xlabel('t')
-# plt.ylabel('m(t)')
-# plt.plot(ss)
-# plt.savefig('lab5zad1PSK')
-#
-#
-# sa = [ptd4.A2 * np.sin(2 * np.pi * ptd4.fn * b / ptd4.fs) for b in range(1500)]
-#
-#
-# h2 = 35
-#
-# ask = np.multiply(ptd4.za,sp)
-# s1 = sumation(ask)
-# m2 = demod1(s1,h2)
-#
-# plt.figure()
-# plt.subplot(3,1,1)
-# plt.title('demodulacja sygnału ASK dla h = {0}'.format(h2))
-# plt.xlabel('t')
-# plt.ylabel('x(t)')
-# plt.plot(ask)
-# plt.subplot(3,1,2)
-# plt.xlabel('t')
-# plt.ylabel('p(t)')
-# plt.plot(s1)
-# plt.subplot(3,1,3)
-# plt.xlabel('t')
-# plt.ylabel('m(t)')
-# plt.plot(m2)
-# plt.savefig('lab5zad1ASK')
+h1 =10
+xt = sumation(psk)
+ss =  demod1(xt,h1)
+plt.figure()
+plt.subplot(3,1,1)
+plt.title('demodulacja sygnału PSK dla h = {0}'.format(h1))
+plt.xlabel('t')
+plt.ylabel('x(t)')
+plt.plot(psk)
+plt.subplot(3,1,2)
+plt.xlabel('t')
+plt.ylabel('p(t)')
+plt.plot(xt)
+plt.subplot(3,1,3)
+plt.xlabel('t')
+plt.ylabel('m(t)')
+plt.plot(ss)
+plt.savefig('lab5zad1PSK')
+
+###############FSK
+sa = [ptd4.A2 * np.sin(2 * np.pi * ptd4.fn * b / ptd4.fs) for b in range(1500)]
+h2 = 35
+ask = np.multiply(ptd4.za,sp)
+s1 = sumation(ask)
+m2 = demod1(s1,h2)
+
+plt.figure()
+plt.subplot(3,1,1)
+plt.title('demodulacja sygnału ASK dla h = {0}'.format(h2))
+plt.xlabel('t')
+plt.ylabel('x(t)')
+plt.plot(ask)
+plt.subplot(3,1,2)
+plt.xlabel('t')
+plt.ylabel('p(t)')
+plt.plot(s1)
+plt.subplot(3,1,3)
+plt.xlabel('t')
+plt.ylabel('m(t)')
+plt.plot(m2)
+plt.savefig('lab5zad1ASK')
+
+################################PSK
 
 sn1 = [np.sin(2 * np.pi * ptd4.fn1 * b / ptd4.fs) for b in range(1500)]
 sn2 = [np.sin(2 * np.pi * ptd4.fn2 * b / ptd4.fs) for b in range(1500)]
