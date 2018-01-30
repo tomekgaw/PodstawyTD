@@ -16,7 +16,6 @@ data_in = [1,1,0,0,1,0,1,0,1,1,1,0,1,0,0]
 # data_in = np.random.randint(2, size=M) ## losowe tworzenie tablicy z 0 lub 1 przy rozmiarze M podawanym wczesniej
 # dlatego wykresy są różne cały czas
 ############## ASK
-print(0)
 za = []
 n = np.arange(M)
 d = np.arange(fs)

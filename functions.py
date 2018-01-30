@@ -131,9 +131,15 @@ def dmodASK(za ,fs, fn,h):
     d =demod1(s,h)
     return d
 
-def dmodFSK(zp ,fs, fn,h):
-    sp = [(np.sin(2 * np.pi * fn * b/ fs)) for b in range(700)]
-    psk = np.multiply(zp,sp)
-    s = sumation(psk,fs)
-    d =demod1(s,h)
+def dmodFSK(zf ,fs,N,tb,h):
+    fn1 = (N + 1) / tb
+    fn2 = (N + 2) / tb
+    sn1 = [np.sin(2 * np.pi * fn1 * b / fs) for b in range(700)]
+    sn2 = [np.sin(2 * np.pi * fn2 * b / fs) for b in range(700)]
+    xt1 = np.multiply(zf, sn1)
+    xt2 = np.multiply(zf, sn2)
+    px1 = sumation(xt1,fs)
+    px2 = sumation(xt2,fs)
+    pt = px1 + px2
+    d = demod1(pt, h)
     return d
