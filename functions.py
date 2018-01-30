@@ -1,7 +1,6 @@
 import numpy as np
 
-
-def code(msg):
+def code(msg): #zmiana wiadomosci 4 bitowej na 7
     x7, x6 ,x5, x3 = msg
     x1 = x3 ^ x5 ^ x7
     x2 = x3 ^ x6 ^ x7
@@ -9,8 +8,7 @@ def code(msg):
     s = [x7,x6, x5, x4, x3, x2, x1]
     return s
 
-
-def decode(message):
+def decode(message): # naprawa 7 bitowej wiadomosci
     x7, x6, x5, x4, x3, x2, x1 = message
     x1p = x3 ^ x5 ^ x7
     x2p = x3^ x6 ^ x7
@@ -26,18 +24,16 @@ def decode(message):
             message[-index] = 0
     return message
 
-def dmessage(w):
+def dmessage(w): # konwersja z 7 bitowej wiadomosci do 4
         x7, x6, x5, x4, x3, x2, x1 = w
         return [x7, x6, x5, x3]
 
-
-def chbit(bit):
+def chbit(bit): # zmiana losowego bitu w wiadomosci
     r = np.random.randint(0,len(bit))
     bit[r] = bit[r] ^ 1
     return bit
 
-
-def modPSK(changed, fs, fn):
+def modPSK(changed, fs, fn): # modulacja PSK
     zp = []
     n = np.arange(7)
     d = np.arange(fs)
@@ -49,8 +45,7 @@ def modPSK(changed, fs, fn):
                 zp.append(np.sin(np.pi + 2 * np.pi * fn * x / fs))
     return zp
 
-
-def modASK(changed, fs, fn):
+def modASK(changed, fs, fn): # modulacja ASK
     A1 = 0.5
     A2 = 4
     M = 7
@@ -65,7 +60,7 @@ def modASK(changed, fs, fn):
                 za.append(A2 * np.sin(2 * np.pi * fn * x / fs))
     return za
 
-def modFSK(changed, fs, tb, N):
+def modFSK(changed, fs, tb, N): # modulacja FSK
     fn1 = (N + 1) / tb
     fn2 = (N + 2) / tb
     zf = []
@@ -80,7 +75,7 @@ def modFSK(changed, fs, tb, N):
 
     return zf
 
-def sumation(x,fs):
+def sumation(x,fs): # calkowanie do demodulacji
     xd = suma = 0
     xt = []
     for _ in np.arange(7):
@@ -101,8 +96,7 @@ def demod1(d,h):
             s.append(0)
     return s
 
-
-def concentr(signal):
+def concentr(signal):  # zmiana sygnalu na wiadomosc 7 bitowa
     ss = np.array(signal)
     w = np.split(ss,7)
     syg = []
@@ -113,25 +107,25 @@ def concentr(signal):
             syg.append(1)
     return syg
 
-def reverse(bit):
+def reverse(bit):  # zmiana bitow
     bit  = [bit[r] ^ 1 for r in range(len(bit))]
     return bit
 
-def dmodPSK(zp ,fs, fn,h):
+def dmodPSK(zp ,fs, fn,h): # demodulacja PSK
     sp = [(np.sin(2 * np.pi * fn * b/ fs)) for b in range(700)]
     psk = np.multiply(zp,sp)
     s = sumation(psk,fs)
     d =demod1(s,h)
     return d
 
-def dmodASK(za ,fs, fn,h):
+def dmodASK(za ,fs, fn,h): # demodulacja ASK
     sa = [(1 * np.sin(2 * np.pi * fn * b / fs)) for b in range(700)]
     ask = np.multiply(za,sa)
     s = sumation(ask,fs)
     d =demod1(s,h)
     return d
 
-def dmodFSK(zf ,fs,N,tb,h):
+def dmodFSK(zf ,fs,N,tb,h): # demodulacja FSK
     fn1 = (N + 1) / tb
     fn2 = (N + 2) / tb
     sn1 = [np.sin(2 * np.pi * fn1 * b / fs) for b in range(700)]
@@ -143,3 +137,11 @@ def dmodFSK(zf ,fs,N,tb,h):
     pt = px1 + px2
     d = demod1(pt, h)
     return d
+
+def check(a,b): # policzenie BER sprawdzam kazdy bit dwoch wiadomosci jesli jest roznica to dodaje 1 do listy potem sunuje i dziele przez ilosc bitow
+    c = []
+    for i in range(4):
+        if a[i] != b[i]:
+            c.append(1)
+    return sum(c)/4
+
